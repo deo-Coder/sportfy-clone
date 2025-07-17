@@ -1,0 +1,272 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <title>Brellah Shop | Modern E-commerce</title>
+    <!-- Required meta tags -->
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+
+    <!-- Bootstrap CSS v5.3.2 -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous" />
+</head>
+
+<body>
+    <header>
+        <!-- Navbar -->
+        <nav class="navbar navbar-expand-lg bg-primary text-info">
+            <div class="container-fluid">
+                <a class="navbar-brand" href="#"><img src="https://getbootstrap.com/docs/5.3/assets/img/bootstrap-logo.svg" width="36" /> Brellah Shop</a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarExample"
+                    aria-controls="navbarExample" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarExample">
+                    <ul class="navbar-nav me-auto mb-0">
+                        <li class="nav-item"><a class="nav-link active text-info" href="#">Home</a></li>
+                        <li class="nav-item"><a class="nav-link text-info" href="#">Shop</a></li>
+                        <li class="nav-item"><a class="nav-link text-info" href="#">About</a></li>
+                        <li class="nav-item"><a class="nav-link text-info" href="#">Contact</a></li>
+                    </ul>
+                    <form class="d-flex me-2">
+                        <input type="text" class="form-control form-control-sm" placeholder="Search products..." />
+                    </form>
+                    <a class="btn btn-light me-2" href="login.html">Login</a>
+                    <a class="btn btn-warning" href="signup.html">Sign up</a>
+                    <a class="btn btn-outline-info me-2" href="profile.html">Profile</a>
+                </div>
+            </div>
+        </nav>
+    </header>
+    <main>
+        <!-- Carousel Section -->
+        <section class="container py-4">
+            <div id="welcomeCarousel" class="carousel slide" data-bs-ride="carousel">
+                <div class="carousel-inner rounded">
+                    <div class="carousel-item active">
+                        <img src="https://images.unsplash.com/photo-1519125323398-675f0ddb6308?auto=format&fit=crop&w=1200&q=80"
+                             class="d-block w-100" style="height:60vh; object-fit:cover;" alt="Welcome">
+                        <div class="carousel-caption d-none d-md-block bg-dark bg-opacity-50 rounded p-3">
+                            <h2 class="display-5 fw-bold text-white">Welcome to Sportfy!</h2>
+                            <p class="lead text-white">Your one-stop shop for the best sports gear and apparel.</p>
+                        </div>
+                    </div>
+                    <div class="carousel-item">
+                        <img src="https://images.unsplash.com/photo-1526170375885-4d8ecf77b99f?auto=format&fit=crop&w=1200&q=80"
+                             class="d-block w-100" style="height:60vh; object-fit:cover;" alt="Trending">
+                        <div class="carousel-caption d-none d-md-block bg-dark bg-opacity-50 rounded p-3">
+                            <h2 class="display-5 fw-bold text-white">Shop Trending Products</h2>
+                            <p class="lead text-white">Discover what’s hot and recommended by our customers.</p>
+                        </div>
+                    </div>
+                    <div class="carousel-item">
+                        <img src="https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=1200&q=80"
+                             class="d-block w-100" style="height:60vh; object-fit:cover;" alt="Deals">
+                        <div class="carousel-caption d-none d-md-block bg-dark bg-opacity-50 rounded p-3">
+                            <h2 class="display-5 fw-bold text-white">Exclusive Deals</h2>
+                            <p class="lead text-white">Sign up for our newsletter and never miss a sale!</p>
+                        </div>
+                    </div>
+                </div>
+                <button class="carousel-control-prev" type="button" data-bs-target="#welcomeCarousel" data-bs-slide="prev">
+                    <span class="carousel-control-prev-icon"></span>
+                </button>
+                <button class="carousel-control-next" type="button" data-bs-target="#welcomeCarousel" data-bs-slide="next">
+                    <span class="carousel-control-next-icon"></span>
+                </button>
+            </div>
+        </section>
+
+        <!-- Cart Summary (shows only if cart has items) -->
+        <section class="container" id="cartSummarySection" style="display:none;">
+            <div class="alert alert-info d-flex justify-content-between align-items-center">
+                <div>
+                    <strong>Cart:</strong>
+                    <span id="cartSummaryItems"></span>
+                </div>
+                <a href="checkout.html" class="btn btn-success btn-sm">Go to Checkout</a>
+            </div>
+        </section>
+
+        <!-- Favourite Products -->
+        <section class="py-4 bg-white">
+            <div class="container">
+                <h3 class="mb-4 text-center">Favourite Products</h3>
+                <div class="row g-4">
+                    <!-- Example favourite product -->
+                    <div class="col-md-4">
+                        <div class="card h-100 shadow-sm">
+                            <img src="https://images.unsplash.com/photo-1519125323398-675f0ddb6308?auto=format&fit=crop&w=400&q=80" class="card-img-top" alt="Favourite Product">
+                            <div class="card-body">
+                                <h5 class="card-title">Running Shoes</h5>
+                                <p class="card-text">High performance shoes for all terrains.</p>
+                                <a href="product-details.html" class="btn btn-outline-primary">View Details</a>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Add more favourite products as needed -->
+                </div>
+            </div>
+        </section>
+
+        <!-- Trending & Most Recommended Products -->
+        <section class="py-4 bg-light">
+            <div class="container">
+                <h3 class="mb-4 text-center">Trending & Most Recommended</h3>
+                <div class="row g-4">
+                    <!-- Example trending product -->
+                    <div class="col-md-4">
+                        <div class="card h-100 shadow-sm border-warning">
+                            <img src="https://images.unsplash.com/photo-1526170375885-4d8ecf77b99f?auto=format&fit=crop&w=400&q=80" class="card-img-top" alt="Trending Product">
+                            <div class="card-body">
+                                <h5 class="card-title">Fitness Tracker</h5>
+                                <p class="card-text">Track your workouts and health stats.</p>
+                                <span class="badge bg-warning mb-2">Trending</span>
+                                <a href="product-details.html" class="btn btn-outline-primary">View Details</a>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Add more trending products as needed -->
+                </div>
+            </div>
+        </section>
+
+        <!-- Featured Products -->
+        <section class="py-5">
+            <div class="container">
+                <h2 class="mb-4 text-center">Featured Products</h2>
+                <div class="row">
+                    <!-- Categories Sidebar -->
+                    <div class="col-md-3 mb-4">
+                        <div class="card shadow-sm">
+                            <div class="card-header bg-primary text-white">
+                                Categories
+                            </div>
+                            <ul class="list-group list-group-flush">
+                                <li class="list-group-item"><a href="#" class="text-decoration-none">All</a></li>
+                                <li class="list-group-item"><a href="#" class="text-decoration-none">Shoes</a></li>
+                                <li class="list-group-item"><a href="#" class="text-decoration-none">Fitness</a></li>
+                                <li class="list-group-item"><a href="#" class="text-decoration-none">Apparel</a></li>
+                                <li class="list-group-item"><a href="#" class="text-decoration-none">Accessories</a></li>
+                            </ul>
+                            <div class="card-body">
+                                <label for="priceFilter" class="form-label">Price Range</label>
+                                <input type="range" class="form-range" min="0" max="500" id="priceFilter">
+                                <div class="d-flex justify-content-between">
+                                    <span>$0</span>
+                                    <span>$500</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Products Grid -->
+                    <div class="col-md-9">
+                        <div class="row g-4">
+                            <div class="col-md-4 product-card" data-category="Shoes">
+                                <div class="card h-100 shadow-sm">
+                                    <img src="https://images.unsplash.com/photo-1519125323398-675f0ddb6308?auto=format&fit=crop&w=400&q=80" class="card-img-top" alt="Product 1">
+                                    <div class="card-body">
+                                        <h5 class="card-title">Running Shoes</h5>
+                                        <p class="card-text">High performance shoes for all terrains.</p>
+                                        <span class="badge bg-success mb-2">Shoes</span>
+                                        <a href="product-details.html" class="btn btn-outline-primary">View Details</a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-4 product-card" data-category="Fitness">
+                                <div class="card h-100 shadow-sm">
+                                    <img src="https://images.unsplash.com/photo-1526170375885-4d8ecf77b99f?auto=format&fit=crop&w=400&q=80" class="card-img-top" alt="Product 2">
+                                    <div class="card-body">
+                                        <h5 class="card-title">Fitness Tracker</h5>
+                                        <p class="card-text">Track your workouts and health stats.</p>
+                                        <span class="badge bg-info mb-2">Fitness</span>
+                                        <a href="product-details.html" class="btn btn-outline-primary">View Details</a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-4 product-card" data-category="Apparel">
+                                <div class="card h-100 shadow-sm">
+                                    <img src="https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=400&q=80" class="card-img-top" alt="Product 3">
+                                    <div class="card-body">
+                                        <h5 class="card-title">Sports Jacket</h5>
+                                        <p class="card-text">Stay warm and stylish on the go.</p>
+                                        <span class="badge bg-warning mb-2">Apparel</span>
+                                        <a href="product-details.html" class="btn btn-outline-primary">View Details</a>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- Add more products as needed -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- Call to Action -->
+        <section class="py-5 bg-primary text-white text-center">
+            <div class="container">
+                <h2 class="mb-3">Join our newsletter</h2>
+                <p class="mb-4">Get updates on new arrivals and exclusive offers.</p>
+                <form class="row justify-content-center">
+                    <div class="col-md-4">
+                        <input type="email" class="form-control" placeholder="Enter your email" required>
+                    </div>
+                    <div class="col-md-2">
+                        <button type="submit" class="btn btn-warning w-100">Subscribe</button>
+                    </div>
+                </form>
+            </div>
+        </section>
+    </main>
+    <footer class="bg-dark text-white py-4 mt-5">
+        <div class="container text-center">
+            <p class="mb-0">&copy; 2025 Sportfy. All rights reserved.</p>
+        </div>
+    </footer>
+    <!-- Bootstrap JavaScript Libraries -->
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"
+        integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.min.js"
+        integrity="sha384-BBtl+eGJRgqQAUMxJ7pMwbEyER4l1g+O15P+16Ep7Q9Q+zqX6gSbd85u4mG4QzX+"
+        crossorigin="anonymous"></script>
+    <script>
+
+        <!-- Category filter logic -->
+document.querySelectorAll('.list-group-item a').forEach(function(link) {
+    link.addEventListener('click', function(e) {
+        e.preventDefault();
+        const category = this.textContent.trim();
+        document.querySelectorAll('.product-card').forEach(function(card) {
+            if (category === 'All' || card.getAttribute('data-category') === category) {
+                card.style.display = '';
+            } else {
+                card.style.display = 'none';
+            }
+        });
+        // Optional: highlight selected category
+        document.querySelectorAll('.list-group-item').forEach(function(item) {
+            item.classList.remove('active');
+        });
+        this.parentElement.classList.add('active');
+    });
+});
+
+// Cart summary logic
+function updateCartSummary() {
+    const cart = JSON.parse(localStorage.getItem('cart') || '[]');
+    const cartSection = document.getElementById('cartSummarySection');
+    const cartItemsSpan = document.getElementById('cartSummaryItems');
+    if (cart.length > 0) {
+        cartSection.style.display = '';
+        let summary = cart.map(item => `${item.name} (x${item.quantity})`).join(', ');
+        cartItemsSpan.textContent = summary;
+    } else {
+        cartSection.style.display = 'none';
+    }
+}
+updateCartSummary();
+</script>
+</body>
+
+</html>

@@ -1,0 +1,180 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <title>Payment | Sportfy</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" />
+    <style>
+        .mno-logo { width: 32px; height: 32px; object-fit: contain; margin-right: 8px; }
+        .security-badges img { height: 32px; margin-right: 8px; }
+        .spinner-border { display: none; }
+    </style>
+</head>
+<body class="bg-light">
+    <div class="container py-5">
+        <!-- Progress Bar -->
+        <div class="mb-4">
+            <div class="progress" style="height: 24px;">
+                <div class="progress-bar bg-success" style="width: 66%;">Order Review</div>
+                <div class="progress-bar bg-primary" style="width: 34%;">Payment</div>
+            </div>
+        </div>
+        <!-- Security Badges -->
+        <div class="security-badges mb-3 text-center">
+            <img src="https://img.icons8.com/color/48/000000/lock--v1.png" alt="Secure">
+            <img src="https://img.icons8.com/color/48/000000/ssl.png" alt="SSL">
+            <span class="text-muted">Your payment is secure</span>
+        </div>
+        <h2 class="mb-4 text-center">Payment</h2>
+        <!-- Order Summary -->
+        <div class="card shadow mb-4 mx-auto" style="max-width: 500px;">
+            <div class="card-header bg-info text-white">Order Summary</div>
+            <div class="card-body" id="orderSummary">
+                <!-- Populated by JS -->
+            </div>
+        </div>
+        <!-- Payment Card -->
+        <div class="card shadow-lg mx-auto" style="max-width: 500px;">
+            <div class="card-body">
+                <h5 class="mb-3">Select Payment Method</h5>
+                <form id="paymentForm">
+                    <div class="mb-3">
+                        <label class="form-label">Mobile Network Operator (MNO)</label>
+                        <select class="form-select" id="mno" required>
+                            <option value="">Choose MNO...</option>
+                            <option value="vodacom"><img class="mno-logo" src="https://upload.wikimedia.org/wikipedia/commons/7/7e/Vodacom_logo.svg" alt="Vodacom">Vodacom M-Pesa</option>
+                            <option value="airtel"><img class="mno-logo" src="https://upload.wikimedia.org/wikipedia/commons/6/6b/Airtel_logo.svg" alt="Airtel">Airtel Money</option>
+                            <option value="tigo"><img class="mno-logo" src="https://upload.wikimedia.org/wikipedia/commons/2/2e/Tigo_logo.svg" alt="Tigo">Tigo Pesa</option>
+                            <option value="halotel"><img class="mno-logo" src="https://upload.wikimedia.org/wikipedia/commons/2/2e/Halotel_logo.png" alt="Halotel">Halopesa</option>
+                            <option value="ttcl"><img class="mno-logo" src="https://upload.wikimedia.org/wikipedia/commons/2/2e/TTCL_logo.png" alt="TTCL">TTCL Pesa</option>
+                        </select>
+                    </div>
+                    <div class="mb-3">
+                        <label for="phone" class="form-label">Mobile Number</label>
+                        <input type="tel" class="form-control" id="phone" placeholder="e.g. 07XXXXXXXX" required>
+                        <div class="form-check mt-2">
+                            <input class="form-check-input" type="checkbox" id="saveMobile">
+                            <label class="form-check-label" for="saveMobile">Save this number for future payments</label>
+                        </div>
+                    </div>
+                    <div class="mb-3">
+                        <label for="amount" class="form-label">Amount (TZS)</label>
+                        <input type="number" class="form-control" id="amount" min="100" required>
+                    </div>
+                    <div class="mb-3">
+                        <small class="text-muted">You’ll receive a prompt on your phone to confirm the payment.</small>
+                    </div>
+                    <button type="submit" class="btn btn-success w-100">Pay Now</button>
+                    <div class="text-center mt-3">
+                        <div class="spinner-border text-success" role="status" id="loadingSpinner">
+                            <span class="visually-hidden">Processing...</span>
+                        </div>
+                    </div>
+                </form>
+                <div class="mt-3 text-center">
+                    <a href="checkout.html" class="btn btn-outline-secondary btn-sm">Back to Checkout</a>
+                    <button class="btn btn-link btn-sm" data-bs-toggle="modal" data-bs-target="#helpModal">Need Help?</button>
+                </div>
+                <!-- Alert messages -->
+                <div id="alertBox" class="mt-3"></div>
+            </div>
+        </div>
+    </div>
+    <!-- Help Modal -->
+    <div class="modal fade" id="helpModal" tabindex="-1" aria-labelledby="helpModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="helpModalLabel">Payment Help</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <ul>
+                        <li>Choose your mobile operator and enter your mobile number.</li>
+                        <li>Enter the amount to pay and click "Pay Now".</li>
+                        <li>Confirm the payment prompt on your mobile device.</li>
+                        <li>If you need assistance, contact our support team.</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+    // Order summary from localStorage cart
+    function renderOrderSummary() {
+        const cart = JSON.parse(localStorage.getItem('cart') || '[]');
+        const summaryDiv = document.getElementById('orderSummary');
+        if (cart.length === 0) {
+            summaryDiv.innerHTML = '<p class="text-center text-muted">No items in your order.</p>';
+            document.getElementById('amount').value = '';
+            return;
+        }
+        let total = 0;
+        let html = '<ul class="list-group mb-3">';
+        cart.forEach(item => {
+            html += `<li class="list-group-item d-flex justify-content-between align-items-center">
+                        <span>${item.name} <small class="text-muted">(x${item.quantity})</small></span>
+                        <span><strong>${(item.price * item.quantity).toFixed(2)} TZS</strong></span>
+                    </li>`;
+            total += item.price * item.quantity;
+        });
+        html += '</ul>';
+        html += `<div class="d-flex justify-content-between align-items-center">
+                    <span class="fw-bold">Total</span>
+                    <span class="fw-bold">${total.toFixed(2)} TZS</span>
+                </div>`;
+        summaryDiv.innerHTML = html;
+        document.getElementById('amount').value = total.toFixed(2);
+    }
+    renderOrderSummary();
+
+    // Save mobile number if checked
+    document.getElementById('saveMobile').addEventListener('change', function() {
+        if (this.checked) {
+            localStorage.setItem('savedMobile', document.getElementById('phone').value);
+        } else {
+            localStorage.removeItem('savedMobile');
+        }
+    });
+    // Load saved mobile number
+    window.addEventListener('DOMContentLoaded', function() {
+        const saved = localStorage.getItem('savedMobile');
+        if (saved) document.getElementById('phone').value = saved;
+    });
+
+    // Payment form validation and spinner
+    document.getElementById('paymentForm').addEventListener('submit', function(e) {
+        e.preventDefault();
+        const mno = document.getElementById('mno').value;
+        const phone = document.getElementById('phone').value.trim();
+        const amount = document.getElementById('amount').value;
+        const alertBox = document.getElementById('alertBox');
+        alertBox.innerHTML = '';
+        // Validate MNO
+        if (!mno) {
+            alertBox.innerHTML = '<div class="alert alert-danger">Please select a Mobile Network Operator.</div>';
+            return;
+        }
+        // Validate phone (Tanzania format: starts with 0, 10 digits)
+        if (!/^0\d{9}$/.test(phone)) {
+            alertBox.innerHTML = '<div class="alert alert-danger">Please enter a valid Tanzanian mobile number (e.g. 07XXXXXXXX).</div>';
+            return;
+        }
+        // Validate amount
+        if (!amount || isNaN(amount) || amount < 100) {
+            alertBox.innerHTML = '<div class="alert alert-danger">Please enter a valid amount (minimum 100 TZS).</div>';
+            return;
+        }
+        // Show spinner
+        document.getElementById('loadingSpinner').style.display = 'inline-block';
+        setTimeout(function() {
+            document.getElementById('loadingSpinner').style.display = 'none';
+            alertBox.innerHTML = '<div class="alert alert-success">Payment request sent! Please confirm on your mobile device.</div>';
+            // Here you would integrate with payment APIs
+        }, 2000);
+    });
+    </script>
+</body>
+</html>
